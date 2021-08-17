@@ -8,8 +8,27 @@
     <script defer src="script.js"></script>
     <title>Snake Game</title>
 </head>
-<body>
+<body onload="capa();">
     <h1><B>SNAKE GAME</B></h1>
     <canvas id="snake" width="512" height="512"></canvas>
+
+    <table>
+        <tr>
+            <th><button onclick="iniciar(this)">Iniciar Jogo</button></th>
+            <th><button onclick="pausar()">Pausar Jogo</button></th>
+        </tr>
+        <tr>
+            <th>Cor da Snake</th>
+            <th>
+                <select id="select" onchange="colorSnake()">
+                    <option value="black">black</option>
+                    <option value="pink">pink</option>
+                    <option value="blue">blue</option>
+                    <option value="white">white</option>
+                </select>
+            </th>
+        </tr>
+    </table>
+   
 </body>
 </html>

@@ -6,26 +6,36 @@ snake[0] = {
     x: 8 * box,
     y: 8 * box
 }
+
 let direction = "right";
 let food = {
     x: Math.floor(Math.random() * 15 + 1) * box,
     y: Math.floor(Math.random() * 15 + 1) * box
 }
 
+let corSnake = "black";
+function colorSnake(elemento){
+    var select = document.querySelector('select');
+    select.addEventListener('change', function() {
+    var option = this.selectedOptions[0];
+    corSnake = option.textContent;  
+    });
+}
+
 function criarBG(){
-    context.fillStyle = "Lightgreen";
+    context.fillStyle = "LimeGreen";
     context.fillRect(0, 0, 16 * box, 16 * box);
 }
 
 function criarCobrinha(){
     for(i = 0; i < snake.length; i++){
-        context.fillStyle = "pink";
+        context.fillStyle = corSnake;
         context.fillRect(snake[i].x, snake[i].y, box, box);
     }
 }
 
 function drawFood(){
-    context.fillStyle = "red";
+    context.fillStyle = "FireBrick";
     context.fillRect(food.x, food.y, box, box);
 }
 
@@ -46,8 +56,9 @@ function iniciarJogo(){
 
     for(i = 1; i < snake.length; i++){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+            alert('Game Over :( Total de Pontos: ' + snake.length);
+            location.reload();
             clearInterval(jogo);
-            alert('Game Over :(');
         }
     }
 
@@ -78,5 +89,23 @@ function iniciarJogo(){
 
     snake.unshift(newHead);
 }
+let jogo;
+function iniciar(elemento){
+    jogo = setInterval(iniciarJogo, 250);
+    elemento.innerHTML = "Aumentar Velocidade";
+}
 
-let jogo = setInterval(iniciarJogo, 100);
+function pausar(){
+    alert("Jogo Pausado!")
+}
+
+function capa() {
+    var ctx = document.getElementById('snake').getContext('2d');
+    var img = new Image();
+    img.onload = function(){
+      ctx.drawImage(img,0, 0, 16 * box, 16 * box);
+    };
+    img.src = 'Snake.png';
+  }
+
+
